@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sweetie Site</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body, html {
+      width: 100%;
+      height: 100%;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+    }
+    .page {
+      display: none;
+      width: 100vw;
+      height: 100vh;
+      background-color: black;
+      color: white;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .active {
+      display: flex;
+    }
+    .glow-heart {
+      font-size: 80px;
+      animation: zoomInOut 2s infinite;
+      color: #d17bff;
+      text-shadow: 0 0 20px #d17bff;
+    }
+    @keyframes zoomInOut {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+    .click-text, .next-tab-btn, .final-text, .incorrect-code {
+      margin-top: 20px;
+      font-size: 20px;
+      color: pink;
+      cursor: pointer;
+    }
+    .gift-img {
+      width: 150px;
+      animation: breathing 2s infinite;
+    }
+    @keyframes breathing {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+    .shining {
+      font-size: 28px;
+      font-weight: bold;
+      background: linear-gradient(90deg, #ffccff, #ff99ff, #ffccff);
+      background-size: 200% auto;
+      color: #fff;
+      background-clip: text;
+      text-fill-color: transparent;
+      animation: shine 2s linear infinite;
+    }
+    @keyframes shine {
+      to { background-position: 200% center; }
+    }
+    .calculator {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      background-color: #ffccff;
+      padding: 20px;
+      border-radius: 15px;
+      margin-top: 20px;
+    }
+    .calculator input, .calculator button {
+      padding: 10px;
+      margin: 5px;
+      font-size: 18px;
+    }
+    .heart-rain {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 999;
+    }
+    .heart {
+      position: absolute;
+      font-size: 24px;
+      color: pink;
+      animation: fall 3s linear infinite;
+    }
+    @keyframes fall {
+      0% { top: -10%; }
+      100% { top: 110%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page active" id="page1">
+    <div class="glow-heart">💜</div>
+    <div class="click-text" onclick="showPage('page2')">Tap to enter sweetie 🎀</div>
+  </div>
+
+  <div class="page" id="page2" style="background-image: url('ENTER_YOUR_BACKGROUND_IMAGE_URL_HERE'); background-size: cover; background-position: center;">
+    <img src="C:\Users\aksha\OneDrive\Desktop\FINAL FOLDER\images\cb975ba5b29606565da4ab3e7e59fb83.jpg" class="gift-img" id="gift" onclick="revealMessage()" />
+    <div class="click-text" id="clickMe">Click me</div>
+    <div class="shining" id="cutieMsg" style="display:none;">Woahhh!! You are cutiee 🐣♥️🧿</div>
+    <div class="next-tab-btn" id="nextTab" style="display:none;" onclick="showPage('page3')">Click for next tab</div>
+  </div>
+
+  <div class="page" id="page3">
+    <div style="background-color: #ffccff; color: black; padding: 20px; border-radius: 15px;">
+      <div style="font-size: 24px; font-weight: bold; color: deeppink;">Hey cutie do you know how much is 27 + 1 ???</div>
+    </div>
+    <div class="click-text" onclick="showCalculator()">Calculate</div>
+    <div class="calculator" id="calculator">
+      <input type="text" id="calcInput" placeholder="Type here..." />
+      <button onclick="calculateLove()">=</button>
+    </div>
+    <div class="shining" id="calcMsg" style="margin-top: 10px;"></div>
+    <div class="click-text" id="nextBtn" style="display:none;" onclick="showPage('page4')">Go to next page</div>
+  </div>
+
+  <div class="page" id="page4">
+    <div class="click-text">Type "our code"</div>
+    <input type="text" id="codeInput" placeholder="Enter code here..." style="padding: 10px; margin-top: 10px; font-size: 16px;" oninput="checkCode()" />
+    <div class="incorrect-code" id="incorrectMsg" style="display:none;">Incorrect code oops! try again</div>
+    <div class="shining" id="loveCounter" style="margin-top: 20px;"></div>
+    <div class="final-text" id="finalMsg" style="display:none;">Thank you for visiting 😘🫂♥️🎀🌻</div>
+    <div class="heart-rain" id="heartRain"></div>
+  </div>
+
+  <script>
+    function showPage(id) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
+    function revealMessage() {
+      document.getElementById('gift').style.display = 'none';
+      document.getElementById('clickMe').style.display = 'none';
+      document.getElementById('cutieMsg').style.display = 'block';
+      setTimeout(() => {
+        document.getElementById('nextTab').style.display = 'block';
+      }, 5000);
+    }
+
+    function showCalculator() {
+      document.getElementById('calculator').style.display = 'flex';
+    }
+
+    function calculateLove() {
+      const input = document.getElementById('calcInput').value;
+      if (input.replace(/\s/g, '') === '27+1') {
+        document.getElementById('calcMsg').innerText = 'We are forever sweetie! 😍♥️🧿🌍💍♾️';
+        document.getElementById('nextBtn').style.display = 'block';
+      }
+    }
+
+    function checkCode() {
+      const val = document.getElementById('codeInput').value;
+      if (val === '2701') {
+        document.getElementById('incorrectMsg').style.display = 'none';
+        startCounting();
+      } else {
+        document.getElementById('incorrectMsg').style.display = 'block';
+      }
+    }
+
+    function startCounting() {
+      let i = 1;
+      const counter = document.getElementById('loveCounter');
+      counter.innerText = '';
+      const interval = setInterval(() => {
+        counter.innerText = `I LOVE YOU ♥️ ${i}%`;
+        i++;
+        if (i > 1000) {
+          clearInterval(interval);
+          counter.innerText = '♾️';
+          startHeartRain();
+          document.getElementById('finalMsg').style.display = 'block';
+        }
+      }, 5);
+    }
+
+    function startHeartRain() {
+      const container = document.getElementById('heartRain');
+      for (let i = 0; i < 50; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.innerText = '❤️';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = 2 + Math.random() * 3 + 's';
+        container.appendChild(heart);
+      }
+    }
+  </script>
+</body>
+</html>
